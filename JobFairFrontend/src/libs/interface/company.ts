@@ -10,3 +10,13 @@ export interface Company {
   __v: number;
   id: string;
 }
+
+export interface AddCompany {
+  name: string;
+  business: string;
+  address: string;
+  province: string;
+  postalcode: string;
+  tel: string;
+  picture: string;
+}

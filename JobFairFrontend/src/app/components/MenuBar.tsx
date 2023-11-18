@@ -8,7 +8,20 @@ export default async function MenuBar() {
 
   return (
     <div className="h-20 bg-white fixed top-0 left-0 right-0 z-30 border-y-gray-400 border-y-2 flex flex-row justify-between items-center">
-      <span className="h-full flex justify-end items-center">
+      <span className="h-full flex justify-end items-center mx-2">
+        <Link href={"/"} className="h-[90%] w-auto">
+          <Image
+            src="/img/vaccine-6592893_1280.png"
+            alt={"logo"}
+            className="h-full w-auto object-contain"
+            width={300}
+            height={300}
+          />
+        </Link>
+      </span>
+      <span className="h-full flex justify-end items-center mx-2">
+        <MenuBarItem title="Company" pageRef="/company" />
+        <MenuBarItem title="My Booking" pageRef="/mybooking" />
         {session ? (
           <Link href="/api/auth/signout">
             <div className="px-5 text-center my-auto text-2xl text-cyan-500">
@@ -22,19 +35,6 @@ export default async function MenuBar() {
             </div>
           </Link>
         )}
-        <MenuBarItem title="My Booking" pageRef="/mybooking" />
-      </span>
-      <span className="h-full flex justify-end items-center">
-        <MenuBarItem title="Booking" pageRef="/booking" />
-        <Link href={"/"} className="h-[90%] w-auto">
-          <Image
-            src="/img/vaccine-6592893_1280.png"
-            alt={"logo"}
-            className="h-full w-auto object-contain"
-            width={300}
-            height={300}
-          />
-        </Link>
       </span>
     </div>
   );
