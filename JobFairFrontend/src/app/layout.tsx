@@ -3,6 +3,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
 import NextAuthProvider from "@/provider/NextAuthProvider";
 import ReduxProvider from "@/redux/ReduxProvider";
+import MenuBar from "./components/MenuBar";
 
 export const metadata = {
   title: "Job Fair",
@@ -21,7 +22,8 @@ export default async function RootLayout({
       <body style={{ margin: 0, padding: 0 }}>
         <ReduxProvider>
           <NextAuthProvider session={session}>
-            <div className="">{children}</div>
+            <MenuBar />
+            <div className="mt-20">{children}</div>
           </NextAuthProvider>
         </ReduxProvider>
       </body>
