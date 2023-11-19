@@ -5,6 +5,7 @@ import Link from "next/link";
 
 export default async function MenuBar() {
   const session = await getServerSession(authOptions);
+  console.log(session);
 
   return (
     <div className="h-20 bg-white fixed top-0 left-0 right-0 z-30 border-y-gray-400 border-y-2 flex flex-row justify-between items-center">
