@@ -21,11 +21,52 @@ export async function addCompnay(company: AddCompany, token: string) {
 }
 
 export async function getAllCompanies() {
-  const res = await fetch("http://localhost:5000/api/v1/companies", {
+  const res = await fetch(process.env.NEXT_PUBLIC_API_ROUTE + "/companies", {
     next: { tags: ["companies"] },
   });
   if (!res.ok) {
-    throw new Error("Failed to fetch hospitals");
+    throw new Error("Failed to fetch companies");
+  }
+
+  return await res.json();
+}
+
+export async function editCompnay(
+  id: string,
+  company: AddCompany,
+  token: string
+) {
+  try {
+    const res = await fetch(
+      process.env.NEXT_PUBLIC_API_ROUTE + "/companies/" + id,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token,
+        },
+        body: JSON.stringify(company),
+      }
+    );
+    if (res.ok) {
+      return res.json();
+    } else {
+      return null;
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function getCompany(id: string) {
+  const res = await fetch(
+    process.env.NEXT_PUBLIC_API_ROUTE + "/companies/" + id,
+    {
+      next: { tags: ["companies"] },
+    }
+  );
+  if (!res.ok) {
+    throw new Error("Failed to fetch companies");
   }
 
   return await res.json();

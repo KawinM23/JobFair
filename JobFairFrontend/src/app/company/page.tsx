@@ -72,6 +72,7 @@ export default function page() {
             onClick={() => {
               setOpenAddCompany(true);
             }}
+            className="text-white rounded-md py-1 px-3 bg-blue-500 hover:bg-blue-300"
           >
             Add Company
           </button>
@@ -244,7 +245,7 @@ export default function page() {
               <div className="float-right">
                 <button
                   type="submit"
-                  className="mt-3 text-white  rounded-md py-1 px-3 bg-blue-500 hover:bg-blue-300"
+                  className="mt-3 text-white rounded-md py-1 px-3 bg-blue-500 hover:bg-blue-300"
                 >
                   Submit
                 </button>

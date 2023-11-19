@@ -32,6 +32,7 @@ export default function CompanyCard({
             src={company.picture}
             alt={company.name}
             fill
+            sizes="25vw"
             className="object-cover rounded-lg"
           />
         </div>
