@@ -9,3 +9,11 @@
 .center-container {
   @apply flex justify-center items-center;
 }
+
+.blue-button {
+  @apply text-white rounded-md py-1 px-3 bg-blue-500 hover:bg-blue-300;
+}
+
+h1 {
+  @apply text-3xl font-bold;
+}

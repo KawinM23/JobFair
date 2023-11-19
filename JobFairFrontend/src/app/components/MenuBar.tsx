@@ -8,7 +8,7 @@ export default async function MenuBar() {
   console.log(session);
 
   return (
-    <div className="h-20 bg-white fixed top-0 left-0 right-0 z-30 border-y-gray-400 border-y-2 flex flex-row justify-between items-center">
+    <div className="h-20 bg-primary-100 fixed top-0 left-0 right-0 z-30 flex flex-row justify-between items-center">
       <span className="h-full flex justify-end items-center mx-2">
         <Link href={"/"} className="h-[90%] w-auto">
           <Image
@@ -22,16 +22,18 @@ export default async function MenuBar() {
       </span>
       <span className="h-full flex justify-end items-center mx-2">
         <MenuBarItem title="Company" pageRef="/company" />
+        <div className="h-[60%] border border-gray-400" />
         <MenuBarItem title="My Booking" pageRef="/mybooking" />
+        <div className="h-[60%] border border-gray-400" />
         {session ? (
           <Link href="/api/auth/signout">
-            <div className="px-5 text-center my-auto text-2xl text-cyan-500">
+            <div className="px-5 text-center my-auto text-2xl text-cyan-500 hover:underline">
               Sign-Out
             </div>
           </Link>
         ) : (
           <Link href="/api/auth/signin">
-            <div className="px-5 text-center my-auto text-2xl text-cyan-500">
+            <div className="px-5 text-center my-auto text-2xl text-cyan-500 hover:underline">
               Sign-In
             </div>
           </Link>
@@ -50,7 +52,7 @@ function MenuBarItem(props: Props) {
   return (
     <Link
       href={props.pageRef}
-      className="w-[140px] text-center my-auto text-2xl text-gray-600"
+      className="text-center my-auto text-2xl text-primary-500 mx-5 hover:underline"
     >
       {props.title}
     </Link>

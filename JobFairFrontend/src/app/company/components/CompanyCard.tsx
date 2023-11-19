@@ -26,7 +26,7 @@ export default function CompanyCard({
 
   return (
     <Link href={"/company/" + company.id}>
-      <div className="bg-blue-100 rounded-2xl p-3 shadow-md hover:scale-[101%] hover:shadow-xl">
+      <div className="bg-secondary-100 rounded-2xl p-3 shadow-md hover:scale-[101%] hover:shadow-xl">
         <div className="relative w-full h-[200px] ">
           <Image
             src={company.picture}

@@ -1,12 +1,12 @@
 "use client";
-
 import { editCompnay, getCompany } from "@/libs/api/company";
 import { AddCompany, Company } from "@/libs/interface/company";
-import { CapitalizeFirstLetter } from "@/libs/text";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CompanyForm from "../components/CompanyForm";
+import BookingForm from "./components/BookingForm";
+import { revalidateTag } from "next/cache";
 
 export default function page({ params }: { params: { id: string } }) {
   const { data: session } = useSession();
@@ -52,6 +52,7 @@ export default function page({ params }: { params: { id: string } }) {
       );
       if (res != null) {
         setOpenEditCompany(false);
+        revalidateTag("company");
         setRefresh((prev) => !prev);
       }
     } catch (error) {}
@@ -96,6 +97,7 @@ export default function page({ params }: { params: { id: string } }) {
           <p className="text-xl">
             Telephone: {companyData.tel != "" ? companyData.tel : "-"}
           </p>
+          <BookingForm />
         </div>
       </div>
       {session?.user.role == "admin" && openEditCompany && (

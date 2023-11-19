@@ -1,12 +1,11 @@
 "use client";
 import { addCompnay, getAllCompanies } from "@/libs/api/company";
 import { AddCompany, Company } from "@/libs/interface/company";
-import { CapitalizeFirstLetter } from "@/libs/text";
-import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import CompanyCard from "./components/CompanyCard";
 import { useSession } from "next-auth/react";
 import CompanyForm from "./components/CompanyForm";
+import { revalidateTag } from "next/cache";
 
 export default function page() {
   const { data: session } = useSession();
@@ -59,15 +58,16 @@ export default function page() {
       if (res != null) {
         setOpenAddCompany(false);
         clearAddCompanyData();
+        revalidateTag("company");
         setRefresh((prev) => !prev);
       }
     } catch (error) {}
   };
 
   return (
-    <main className="p-5">
+    <main className="py-5 px-10">
       <span className="flex flex-row justify-between">
-        <h1 className="text-3xl font-bold">Company</h1>
+        <h1>Company</h1>
         {session?.user.role == "admin" && (
           <button
             onClick={() => {
@@ -81,7 +81,7 @@ export default function page() {
       </span>
 
       {allCompanies ? (
-        <div className="grid grid-cols-4 gap-3 my-3">
+        <div className="grid grid-cols-4 gap-5 my-3">
           {allCompanies.map((company) => {
             return (
               <CompanyCard

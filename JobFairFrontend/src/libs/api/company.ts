@@ -22,7 +22,7 @@ export async function addCompnay(company: AddCompany, token: string) {
 
 export async function getAllCompanies() {
   const res = await fetch(process.env.NEXT_PUBLIC_API_ROUTE + "/companies", {
-    next: { tags: ["companies"] },
+    next: { tags: ["company"] },
   });
   if (!res.ok) {
     throw new Error("Failed to fetch companies");

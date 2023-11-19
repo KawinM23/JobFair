@@ -163,10 +163,7 @@ export default function CompanyForm({
             />
           </div>
           <div className="float-right">
-            <button
-              type="submit"
-              className="mt-3 text-white rounded-md py-1 px-3 bg-blue-500 hover:bg-blue-300"
-            >
+            <button type="submit" className="mt-3 blue-button">
               Submit
             </button>
           </div>

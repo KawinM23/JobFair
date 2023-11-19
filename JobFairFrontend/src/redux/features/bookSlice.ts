@@ -1,5 +1,5 @@
+import { BookingItem } from "@/libs/interface/booking";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { BookingItem } from "../../../interface";
 
 type BookState = {
   bookingItems: BookingItem[];
@@ -17,8 +17,8 @@ export const bookSlice = createSlice({
     },
     removeBooking: (state, action: PayloadAction<BookingItem>) => {
       const remainItems = state.bookingItems.filter((obj) => {
-        obj.bookedHospital !== action.payload.bookedHospital ||
-          obj.bookedDate !== action.payload.bookedDate;
+        obj.company !== action.payload.company ||
+          obj.user !== action.payload.user;
       });
 
       state.bookingItems = remainItems;
