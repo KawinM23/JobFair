@@ -12,7 +12,13 @@ const persistConfig = {
 const rootReducer = combineReducers({ bookSlice });
 const reduxPersistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const store = configureStore({ reducer: reduxPersistedReducer });
+export const store = configureStore({
+  reducer: reduxPersistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
+});
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

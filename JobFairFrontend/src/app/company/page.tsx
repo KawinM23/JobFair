@@ -9,7 +9,6 @@ import { useSession } from "next-auth/react";
 
 export default function page() {
   const { data: session } = useSession();
-  console.log(session);
 
   const [allCompanies, setAllCompanies] = useState<Company[] | null>(null);
   const [refresh, setRefresh] = useState<boolean>(false);
@@ -54,8 +53,7 @@ export default function page() {
     try {
       const res = await addCompnay(
         addCompanyData as AddCompany,
-        session?.user.token ??
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NTg3YWYyZTdhNjE3NGI3MDNkMTMyMCIsImlhdCI6MTcwMDMyNDE5NCwiZXhwIjoxNzMxODYwMTk0fQ.xu54hexPQapPJnLZtVgrW1avPuQb_SP8_oBA_BPD0Sc"
+        session?.user.token ?? ""
       );
       if (res != null) {
         setOpenAddCompany(false);
@@ -69,7 +67,7 @@ export default function page() {
     <main className="p-5">
       <span className="flex flex-row justify-between">
         <h1 className="text-3xl font-bold">Company</h1>
-        {session?.user.role != "admin" && (
+        {session?.user.role == "admin" && (
           <button
             onClick={() => {
               setOpenAddCompany(true);
@@ -88,6 +86,7 @@ export default function page() {
                 company={company}
                 session={session}
                 setRefresh={setRefresh}
+                key={company.id}
               />
             );
           })}
@@ -95,7 +94,7 @@ export default function page() {
       ) : (
         <div>No Company Available!</div>
       )}
-      {session?.user.role != "admin" && openAddCompany && (
+      {session?.user.role == "admin" && openAddCompany && (
         <div
           className={
             "flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%)] max-h-full bg-gray-700 bg-opacity-25"

@@ -1,4 +1,4 @@
-import { userLogIn } from "@/libs/userLogIn";
+import { userLogin, getAuthMe } from "@/libs/api/user";
 import NextAuth from "next-auth";
 import { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -25,11 +25,12 @@ export const authOptions: AuthOptions = {
         // (i.e., the request IP address)
 
         if (!credentials) return null;
-        const user = userLogIn(credentials.email, credentials.password);
+        const user = await userLogin(credentials.email, credentials.password);
 
         // If no error and we have user data, return it
         if (user) {
-          return user;
+          const me = await getAuthMe(user.token);
+          return { ...user, ...me.data };
         }
         // Return null if user data could not be retrieved
         return null;
