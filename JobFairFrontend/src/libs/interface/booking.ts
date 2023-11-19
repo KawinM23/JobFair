@@ -7,7 +7,7 @@ export interface BookingItem {
 
 export interface BookingInterface {
   _id: string;
-  bookingDate: Date;
+  bookingDate: string;
   user: {
     _id: string;
     name: string;
@@ -20,6 +20,6 @@ export interface BookingInterface {
     tel: string;
     id: string;
   };
-  createdAt: Date;
+  createdAt: string;
   __v: 0;
 }
