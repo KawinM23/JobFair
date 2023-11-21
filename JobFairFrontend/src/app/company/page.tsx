@@ -5,20 +5,22 @@ import { useState, useEffect } from "react";
 import CompanyCard from "./components/CompanyCard";
 import { useSession } from "next-auth/react";
 import CompanyForm from "./components/CompanyForm";
-import { revalidateTag } from "next/cache";
 
 export default function page() {
   const { data: session } = useSession();
 
   const [allCompanies, setAllCompanies] = useState<Company[] | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const [refresh, setRefresh] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       const res = await getAllCompanies();
       if (res.data != null) {
         setAllCompanies(res.data);
       }
+      setLoading(false);
     };
 
     fetchData();
@@ -58,10 +60,11 @@ export default function page() {
       if (res != null) {
         setOpenAddCompany(false);
         clearAddCompanyData();
-        revalidateTag("company");
         setRefresh((prev) => !prev);
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -80,7 +83,9 @@ export default function page() {
         )}
       </span>
 
-      {allCompanies ? (
+      {loading ? (
+        <></>
+      ) : allCompanies ? (
         <div className="grid grid-cols-4 gap-5 my-3">
           {allCompanies.map((company) => {
             return (

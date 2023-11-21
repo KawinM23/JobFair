@@ -2,6 +2,7 @@ import Image from "next/image";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import Link from "next/link";
+import { HiBriefcase } from "react-icons/hi";
 
 export default async function MenuBar() {
   const session = await getServerSession(authOptions);
@@ -9,17 +10,13 @@ export default async function MenuBar() {
 
   return (
     <div className="h-20 bg-primary-100 fixed top-0 left-0 right-0 z-30 flex flex-row justify-between items-center">
-      <span className="h-full flex justify-end items-center mx-2">
-        <Link href={"/"} className="h-[90%] w-auto">
-          <Image
-            src="/img/vaccine-6592893_1280.png"
-            alt={"logo"}
-            className="h-full w-auto object-contain"
-            width={300}
-            height={300}
-          />
-        </Link>
-      </span>
+      <Link
+        href={"/"}
+        className="h-[80%] mx-4 justify-end w-auto text-3xl flex items-center text-primary-500 gap-3"
+      >
+        <HiBriefcase size={40} className="inline" />
+        JobFair
+      </Link>
       <span className="h-full flex justify-end items-center mx-2">
         <MenuBarItem title="Company" pageRef="/company" />
         <div className="h-[60%] border border-gray-400" />

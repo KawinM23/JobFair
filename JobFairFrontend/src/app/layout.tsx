@@ -20,12 +20,12 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body style={{ margin: 0, padding: 0 }}>
-        <ReduxProvider>
-          <NextAuthProvider session={session}>
-            <MenuBar />
-            <div className="mt-20">{children}</div>
-          </NextAuthProvider>
-        </ReduxProvider>
+        {/* <ReduxProvider> */}
+        <NextAuthProvider session={session}>
+          <MenuBar />
+          <div className="mt-20">{children}</div>
+        </NextAuthProvider>
+        {/* </ReduxProvider> */}
       </body>
     </html>
   );

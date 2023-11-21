@@ -23,3 +23,8 @@ export interface BookingInterface {
   createdAt: string;
   __v: 0;
 }
+
+export interface AddBookingInterface {
+  bookingDate: Date;
+  createdAt: Date;
+}

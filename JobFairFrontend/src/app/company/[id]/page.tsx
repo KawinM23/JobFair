@@ -6,12 +6,12 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import CompanyForm from "../components/CompanyForm";
 import BookingForm from "./components/BookingForm";
-import { revalidateTag } from "next/cache";
 
 export default function page({ params }: { params: { id: string } }) {
   const { data: session } = useSession();
 
   const [companyData, setCompanyData] = useState<Company | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
   const [refresh, setRefresh] = useState<boolean>(false);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export default function page({ params }: { params: { id: string } }) {
     setEditCompanyData(companyData as AddCompany);
   };
 
-  const onSubmit = async () => {
+  const onEditCompany = async () => {
     try {
       const res = await editCompnay(
         companyData?.id ?? "",
@@ -52,7 +52,6 @@ export default function page({ params }: { params: { id: string } }) {
       );
       if (res != null) {
         setOpenEditCompany(false);
-        revalidateTag("company");
         setRefresh((prev) => !prev);
       }
     } catch (error) {}
@@ -97,7 +96,7 @@ export default function page({ params }: { params: { id: string } }) {
           <p className="text-xl">
             Telephone: {companyData.tel != "" ? companyData.tel : "-"}
           </p>
-          <BookingForm />
+          <BookingForm companyId={companyData.id} session={session} />
         </div>
       </div>
       {session?.user.role == "admin" && openEditCompany && (
@@ -105,7 +104,7 @@ export default function page({ params }: { params: { id: string } }) {
           title={"Edit Company"}
           companyDataState={[editCompanyData, setEditCompanyData]}
           setOpenModal={setOpenEditCompany}
-          onSubmit={onSubmit}
+          onSubmit={onEditCompany}
         />
       )}
     </main>
