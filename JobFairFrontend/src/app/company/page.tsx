@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import CompanyCard from "./components/CompanyCard";
 import { useSession } from "next-auth/react";
 import CompanyForm from "./components/CompanyForm";
+import { HiOutlinePlus } from "react-icons/hi";
 
 export default function page() {
   const { data: session } = useSession();
@@ -76,8 +77,9 @@ export default function page() {
             onClick={() => {
               setOpenAddCompany(true);
             }}
-            className="text-white rounded-md py-1 px-3 bg-blue-500 hover:bg-blue-300"
+            className="text-white rounded-md py-1 px-3 bg-blue-500 hover:bg-blue-300 flex items-center gap-2"
           >
+            <HiOutlinePlus size={20} />
             Add Company
           </button>
         )}

@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import CompanyForm from "../components/CompanyForm";
 import BookingForm from "./components/BookingForm";
+import { HiPencil } from "react-icons/hi";
 
 export default function page({ params }: { params: { id: string } }) {
   const { data: session } = useSession();
@@ -85,6 +86,7 @@ export default function page({ params }: { params: { id: string } }) {
                 }}
                 className="text-white rounded-md py-1 px-3 bg-blue-500 hover:bg-blue-300"
               >
+                <HiPencil className="inline mr-1" />
                 Edit Company
               </button>
             )}

@@ -9,6 +9,7 @@ import "dayjs/locale/en-gb";
 import { Session } from "next-auth";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { HiBookOpen } from "react-icons/hi";
 
 export default function BookingForm({
   companyId,
@@ -59,7 +60,10 @@ export default function BookingForm({
             slotProps={{ textField: { size: "small" } }}
           />
         </LocalizationProvider>
-        <button className="blue-button">Book</button>
+        <button className="blue-button text-lg">
+          <HiBookOpen className="inline mr-2 " />
+          Book
+        </button>
       </form>
     </div>
   );
