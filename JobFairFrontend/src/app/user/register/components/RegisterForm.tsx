@@ -21,15 +21,14 @@ export default function RegisterForm() {
     try {
       console.log(registerData);
       const res = await register(registerData);
-      if (res.ok) {
+      console.log(res);
+      if (res.success) {
         router.push("/user/login");
-      } else {
-        alert("Register Failed");
       }
-    } catch (error) {}
+    } catch (error) {
+      alert("Register Failed");
+    }
   };
-
-  console.log(new Date().toISOString());
 
   return (
     <form className="flex flex-col gap-3" action={onSubmit}>
