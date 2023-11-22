@@ -46,7 +46,7 @@ export default function LoginForm(props: {
         onChange={onChange}
       />
       <button className="text-white rounded-md py-1 px-3 bg-secondary-500 hover:bg-secondary-300">
-        Register
+        Login
       </button>
       {props.searchParams?.error && (
         <p className="text-white text-center rounded-md px-3 bg-red-500">
