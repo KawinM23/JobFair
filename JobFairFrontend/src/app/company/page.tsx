@@ -11,6 +11,10 @@ export default function page() {
   const { data: session } = useSession();
 
   const [allCompanies, setAllCompanies] = useState<Company[] | null>(null);
+  const [displayCompanies, setDisplayCompanies] = useState<Company[] | null>(
+    null
+  );
+  const [searchName, setSearchName] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(true);
   const [refresh, setRefresh] = useState<boolean>(false);
 
@@ -25,9 +29,37 @@ export default function page() {
     };
 
     fetchData();
+    updateSearch();
 
     return () => {};
   }, [refresh]);
+
+  const updateSearch = () => {
+    if (allCompanies != null) {
+      if (searchName != "") {
+        let filteredCompanies: Company[] = [];
+        filteredCompanies = filteredCompanies.concat(
+          allCompanies.filter((company) =>
+            company.name.toLowerCase().includes(searchName.toLowerCase())
+          )
+        );
+        filteredCompanies = filteredCompanies.concat(
+          allCompanies.filter(
+            (company) =>
+              !filteredCompanies.includes(company) &&
+              company.business.toLowerCase().includes(searchName.toLowerCase())
+          )
+        );
+        setDisplayCompanies(filteredCompanies);
+      } else {
+        setDisplayCompanies(allCompanies);
+      }
+    }
+  };
+
+  useEffect(() => {
+    updateSearch();
+  }, [searchName, allCompanies]);
 
   const [openAddCompany, setOpenAddCompany] = useState(false);
   const [addCompanyData, setAddCompanyData] = useState({
@@ -71,7 +103,20 @@ export default function page() {
   return (
     <main className="py-5 px-10">
       <span className="flex flex-row justify-between">
-        <h1>Company</h1>
+        <span>
+          <h1 className="inline">Company</h1>
+          <input
+            type="text"
+            id="companyName"
+            name="companyName"
+            placeholder="Search Company Name or Business"
+            className="rounded-md border flex-1 py-1 px-2 mx-4 inline text-lg w-[400px]"
+            value={searchName}
+            onChange={(e) => {
+              setSearchName(e.target.value);
+            }}
+          />
+        </span>
         {session?.user.role == "admin" && (
           <button
             onClick={() => {
@@ -87,9 +132,9 @@ export default function page() {
 
       {loading ? (
         <></>
-      ) : allCompanies ? (
-        <div className="grid grid-cols-4 gap-5 my-3">
-          {allCompanies.map((company) => {
+      ) : displayCompanies && displayCompanies.length != 0 ? (
+        <div className="grid grid-cols-4 gap-5 my-5">
+          {displayCompanies.map((company) => {
             return (
               <CompanyCard
                 company={company}
@@ -101,7 +146,7 @@ export default function page() {
           })}
         </div>
       ) : (
-        <div>No Company Available!</div>
+        <div className="text-xl text-gray-500 my-5">No Company!</div>
       )}
       {session?.user.role == "admin" && openAddCompany && (
         <CompanyForm

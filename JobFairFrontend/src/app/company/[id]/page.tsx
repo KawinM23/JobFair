@@ -98,7 +98,9 @@ export default function page({ params }: { params: { id: string } }) {
           <p className="text-xl">
             Telephone: {companyData.tel != "" ? companyData.tel : "-"}
           </p>
-          <BookingForm companyId={companyData.id} session={session} />
+          {session?.user && (
+            <BookingForm companyId={companyData.id} session={session} />
+          )}
         </div>
       </div>
       {session?.user.role == "admin" && openEditCompany && (

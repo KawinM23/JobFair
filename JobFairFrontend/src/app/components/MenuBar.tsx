@@ -20,8 +20,12 @@ export default async function MenuBar() {
       <span className="h-full flex justify-end items-center mx-2">
         <MenuBarItem title="Company" pageRef="/company" />
         <div className="h-[60%] border border-gray-400" />
-        <MenuBarItem title="My Booking" pageRef="/mybooking" />
-        <div className="h-[60%] border border-gray-400" />
+        {session && (
+          <>
+            <MenuBarItem title="My Booking" pageRef="/mybooking" />
+            <div className="h-[60%] border border-gray-400" />
+          </>
+        )}
         {session ? (
           <Link href="/api/auth/signout">
             <div className="px-5 text-center my-auto text-2xl text-cyan-500 hover:underline">
