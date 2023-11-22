@@ -22,7 +22,9 @@ export default function RegisterForm() {
       console.log(registerData);
       const res = await register(registerData);
       if (res.ok) {
-        router.push("/api/auth/signin");
+        router.push("/user/login");
+      } else {
+        alert("Register Failed");
       }
     } catch (error) {}
   };
