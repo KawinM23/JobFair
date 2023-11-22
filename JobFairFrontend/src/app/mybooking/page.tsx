@@ -109,7 +109,16 @@ function BookingTab({
   };
 
   return (
-    <div className="w-full bg-secondary-100 rounded-xl p-2 grid grid-cols-[40%_40%_20%] items-center">
+    <div
+      className={`w-full bg-secondary-100 rounded-xl p-2 grid ${
+        session?.user.role === "admin"
+          ? "grid-cols-[20%_30%_30%_20%]"
+          : "grid-cols-[40%_40%_20%]"
+      } items-center  `}
+    >
+      {session?.user.role === "admin" && (
+        <p className="text-xl">User: {booking.user.name}</p>
+      )}
       <Link href={"/company/" + booking.company.id} className="text-xl">
         Company: {booking.company.name}
       </Link>
