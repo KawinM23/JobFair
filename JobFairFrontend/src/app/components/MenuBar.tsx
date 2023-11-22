@@ -1,12 +1,11 @@
-import Image from "next/image";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+"use client";
+
 import Link from "next/link";
 import { HiBriefcase } from "react-icons/hi";
+import { signIn, signOut, useSession } from "next-auth/react";
 
-export default async function MenuBar() {
-  const session = await getServerSession(authOptions);
-  console.log(session);
+export default function MenuBar() {
+  const { data: session } = useSession();
 
   return (
     <div className="h-20 bg-primary-100 fixed top-0 left-0 right-0 z-30 flex flex-row justify-between items-center">
@@ -27,17 +26,23 @@ export default async function MenuBar() {
           </>
         )}
         {session ? (
-          <Link href="/api/auth/signout">
-            <div className="px-5 text-center my-auto text-2xl text-cyan-500 hover:underline">
-              Sign-Out
-            </div>
-          </Link>
+          <button
+            onClick={() => {
+              signOut();
+            }}
+            className="px-5 text-center my-auto text-2xl text-cyan-500 hover:underline"
+          >
+            Sign-Out
+          </button>
         ) : (
-          <Link href="/api/auth/signin">
-            <div className="px-5 text-center my-auto text-2xl text-cyan-500 hover:underline">
-              Sign-In
-            </div>
-          </Link>
+          <button
+            onClick={() => {
+              signIn();
+            }}
+            className="px-5 text-center my-auto text-2xl text-cyan-500 hover:underline"
+          >
+            Sign-In
+          </button>
         )}
       </span>
     </div>

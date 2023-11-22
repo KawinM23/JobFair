@@ -47,7 +47,7 @@ export default function page() {
       <div className="flex flex-col gap-2 mt-5">
         {loading ? (
           <></>
-        ) : allBookings ? (
+        ) : allBookings && allBookings.length != 0 ? (
           allBookings.map((booking) => {
             return (
               <BookingTab
