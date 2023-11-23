@@ -1,8 +1,8 @@
-import bookSlice from "./features/bookSlice";
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { useSelector, TypedUseSelectorHook } from "react-redux";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import bookSlice from "./features/bookSlice";
 
 const persistConfig = {
   key: "rootPersist",
